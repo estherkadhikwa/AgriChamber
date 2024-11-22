@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Application - Chamber of Agricultural Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h2 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        form {
+            margin-top: 2rem;
+        }
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            padding: 0.8rem 2rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        .terms {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .terms input {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Online Membership Application</h1>
+    </header>
+    <main>
+        <h2>Become a Member</h2>
+        <p>Fill out the form below to apply for membership with the Chamber of Agricultural Board. Our team will review your application and get in touch with you shortly.</p>
+        <form action="/submit-application" method="POST">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="business">Business Name (if applicable):</label>
+            <input type="text" id="business" name="business">
+
+            <label for="membership-type">Membership Type:</label>
+            <select id="membership-type" name="membership-type" required>
+                <option value="farmer">Farmer</option>
+                <option value="agribusiness">Agribusiness</option>
+                <option value="supplier">Supplier</option>
+                <option value="researcher">Researcher</option>
+            </select>
+
+            <label for="message">Why do you want to join the Chamber?</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <div class="terms">
+                <label>
+                    <input type="checkbox" name="terms" required>
+                    I agree to the <a href="/terms">terms and conditions</a>.
+                </label>
+            </div>
+
+            <button type="submit">Submit Application</button>
+        </form>
+    </main>
+</body>
+</html>

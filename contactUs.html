@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Chamber of Agricultural Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        .contact-option {
+            margin-bottom: 1.5rem;
+        }
+        .contact-option a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-option a:hover {
+            text-decoration: underline;
+        }
+        form {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            padding: 0.8rem 2rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contact Us</h1>
+    </header>
+    <main>
+        <p>We'd love to hear from you. You can reach us through the following options:</p>
+
+        <!-- Contact Options -->
+        <section class="contact-option">
+            <h2>Contact via Email</h2>
+            <p>For inquiries, please email us at <a href="mailto:info@agrichamber.org">info@agrichamber.org</a></p>
+        </section>
+
+        <section class="contact-option">
+            <h2>Phone</h2>
+            <p>Call us at: +264-123-4567</p>
+        </section>
+
+        <section class="contact-option">
+            <h2>Physical Address</h2>
+            <p>Visit us at:</p>
+            <p>Agri-Chamber of Agricultural Board</p>
+            <p>123 Farm Street, Agricultural City, Country</p>
+        </section>
+
+        <!-- Contact Form -->
+        <section>
+            <h2>Send Us a Message</h2>
+            <form action="/submit-form" method="POST">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

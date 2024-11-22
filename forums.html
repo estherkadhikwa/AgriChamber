@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forums - Chamber of Agricultural Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h2 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .forum-section {
+            margin-bottom: 2rem;
+        }
+        .forum-section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .forum-topic {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .forum-topic a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .forum-topic a:hover {
+            text-decoration: underline;
+        }
+        .post-form {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .post-form label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .post-form input, .post-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .post-form button {
+            padding: 0.8rem 2rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .post-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Forums and Discussion Boards</h1>
+    </header>
+    <main>
+        <p>Welcome to the Chamber of Agricultural Board's forum. Here, members can share knowledge, experiences, and engage in discussions related to agriculture.</p>
+
+        <!-- Forum Sections -->
+        <div class="forum-section">
+            <h3>Agricultural Best Practices</h3>
+            <div class="forum-topic">
+                <a href="#">How to Improve Crop Yield with Minimal Resources?</a>
+                <p>Join the conversation and learn from other farmers' experiences on improving crop yield with limited resources and modern techniques.</p>
+            </div>
+            <div class="forum-topic">
+                <a href="#">Sustainable Farming Techniques</a>
+                <p>Discuss the latest sustainable farming techniques that help reduce environmental impact while maintaining productivity.</p>
+            </div>
+        </div>
+
+        <div class="forum-section">
+            <h3>Market Linkages and Business Opportunities</h3>
+            <div class="forum-topic">
+                <a href="#">How to Connect with Export Markets?</a>
+                <p>Explore ways to expand your market reach and connect with potential export partners and suppliers.</p>
+            </div>
+            <div class="forum-topic">
+                <a href="#">Financial Tips for Agribusinesses</a>
+                <p>Share insights on financial strategies, funding, and managing cash flow for small and large agribusinesses.</p>
+            </div>
+        </div>
+
+        <!-- New Post Form -->
+        <div class="post-form">
+            <h2>Create a New Discussion</h2>
+            <form action="/submit-post" method="POST">
+                <label for="topic-title">Topic Title:</label>
+                <input type="text" id="topic-title" name="topic-title" required>
+
+                <label for="topic-description">Topic Description:</label>
+                <textarea id="topic-description" name="topic-description" rows="4" required></textarea>
+
+                <button type="submit">Submit Topic</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

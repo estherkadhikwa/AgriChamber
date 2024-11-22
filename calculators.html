@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculators and Tools - Chamber of Agricultural Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h2 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .calculator-container {
+            margin-bottom: 2rem;
+        }
+        .calculator {
+            background-color: #f4f4f4;
+            padding: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 0.8rem 2rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calculators and Interactive Tools</h1>
+    </header>
+    <main>
+        <p>Use our tools to help with crop yield calculations, financial planning, and other agricultural-related tasks.</p>
+
+        <!-- Crop Yield Calculator -->
+        <section class="calculator-container">
+            <h2>Crop Yield Calculator</h2>
+            <div class="calculator">
+                <label for="area">Area (in acres):</label>
+                <input type="number" id="area" name="area" required>
+
+                <label for="yield-per-acre">Expected Yield per Acre (in bushels):</label>
+                <input type="number" id="yield-per-acre" name="yield-per-acre" required>
+
+                <button type="button" onclick="calculateCropYield()">Calculate Total Yield</button>
+
+                <h3>Total Yield: <span id="total-yield">0</span> bushels</h3>
+            </div>
+        </section>
+
+        <!-- Financial Planning Tool -->
+        <section class="calculator-container">
+            <h2>Financial Planning Tool</h2>
+            <div class="calculator">
+                <label for="income">Expected Income (per month in USD):</label>
+                <input type="number" id="income" name="income" required>
+
+                <label for="expenses">Monthly Expenses (in USD):</label>
+                <input type="number" id="expenses" name="expenses" required>
+
+                <button type="button" onclick="calculateProfit()">Calculate Monthly Profit</button>
+
+                <h3>Monthly Profit: <span id="monthly-profit">$0</span></h3>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Crop Yield Calculation
+        function calculateCropYield() {
+            const area = parseFloat(document.getElementById('area').value);
+            const yieldPerAcre = parseFloat(document.getElementById('yield-per-acre').value);
+
+            if (isNaN(area) || isNaN(yieldPerAcre) || area <= 0 || yieldPerAcre <= 0) {
+                alert('Please enter valid numbers for area and yield.');
+                return;
+            }
+
+            const totalYield = area * yieldPerAcre;
+            document.getElementById('total-yield').textContent = totalYield.toFixed(2);
+        }
+
+        // Financial Planning Calculation
+        function calculateProfit() {
+            const income = parseFloat(document.getElementById('income').value);
+            const expenses = parseFloat(document.getElementById('expenses').value);
+
+            if (isNaN(income) || isNaN(expenses) || income < 0 || expenses < 0) {
+                alert('Please enter valid numbers for income and expenses.');
+                return;
+            }
+
+            const profit = income - expenses;
+            document.getElementById('monthly-profit').textContent = `$${profit.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
