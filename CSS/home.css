@@ -1,18 +1,20 @@
+/* --------------HomePage styling ------------ */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(/Images/Background\ 1.jpg);
 }
 
 .logo img{
-    width: 30px;
-    margin-left: 15px;
+    width: 45px;
 }
 
 .navbar a {
     display: flex;
-    margin-left: 15px;
+    padding-left: 15px;
 }
 
 .navbar {
@@ -26,8 +28,14 @@ body {
 .navbar ul li {
     list-style: none;
     display: inline-block;
-    margin: 0 20px;
+    margin: 0 5px;
     position: relative;
+    gap: 15px;
+
+}
+
+.links li{
+    display: flex;
 }
 
 input[type="text"] {
@@ -47,8 +55,9 @@ section {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-h2 {
+h1 {
     color: #333;
+    padding-left: 25px;
 }
 a {
     display: inline-block;
