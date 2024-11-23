@@ -29,3 +29,16 @@ signupLoginLink.forEach(link => {
         formPopup.classList[link.id === 'signup-link' ? 'add' : 'remove']("show-signup");
     });
 });
+
+// Search bar functionality
+document.querySelector('.search-bar').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const query = e.target.query.value.trim(); // Get the search query
+    if (query) {
+        console.log('Search for:', query);
+        // Example: Redirect to a search results page (replace '#' with your search page URL)
+        window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+    } else {
+        console.log('Search field is empty.');
+    }
+});
