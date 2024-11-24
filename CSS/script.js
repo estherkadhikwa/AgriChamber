@@ -1,10 +1,10 @@
 const navbarMenu = document.querySelector(".navbar .links");
 const hamburgerBtn = document.querySelector(".hamburger-btn");
-const hideMenuBtn = navbarMenu.querySelector(".close-btn");
+const hideMenuBtn = document.querySelector(".navbar .close-btn");
 const showPopupBtn = document.querySelector(".login-btn");
 const formPopup = document.querySelector(".form-popup");
-const hidePopupBtn = formPopup.querySelector(".close-btn");
-const signupLoginLink = formPopup.querySelectorAll(".bottom-link a");
+const hidePopupBtn = document.querySelector(".form-popup .close-btn");
+const signupLoginLinks = document.querySelectorAll(".bottom-link a");
 
 // Show mobile menu
 hamburgerBtn.addEventListener("click", () => {
@@ -12,33 +12,40 @@ hamburgerBtn.addEventListener("click", () => {
 });
 
 // Hide mobile menu
-hideMenuBtn.addEventListener("click", () =>  hamburgerBtn.click());
+hideMenuBtn.addEventListener("click", () => {
+    navbarMenu.classList.remove("show-menu");
+});
 
 // Show login popup
 showPopupBtn.addEventListener("click", () => {
-    document.body.classList.toggle("show-popup");
+    document.body.classList.add("show-popup");
 });
 
 // Hide login popup
-hidePopupBtn.addEventListener("click", () => showPopupBtn.click());
+hidePopupBtn.addEventListener("click", () => {
+    document.body.classList.remove("show-popup");
+});
 
-// Show or hide signup form
-signupLoginLink.forEach(link => {
+// Toggle between login and signup forms
+signupLoginLinks.forEach(link => {
     link.addEventListener("click", (e) => {
         e.preventDefault();
-        formPopup.classList[link.id === 'signup-link' ? 'add' : 'remove']("show-signup");
+        if (link.id === 'signup-link') {
+            formPopup.classList.add("show-signup");
+        } else {
+            formPopup.classList.remove("show-signup");
+        }
     });
 });
 
 // Search bar functionality
 document.querySelector('.search-bar').addEventListener('submit', function (e) {
     e.preventDefault();
-    const query = e.target.query.value.trim(); // Get the search query
+    const query = e.target.query.value.trim();
     if (query) {
-        console.log('Search for:', query);
-        // Example: Redirect to a search results page (replace '#' with your search page URL)
+        console.log(`Search for: ${query}`);
         window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
     } else {
-        console.log('Search field is empty.');
+        alert("Search field cannot be empty!");
     }
 });

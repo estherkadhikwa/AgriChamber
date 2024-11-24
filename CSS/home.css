@@ -36,7 +36,7 @@ header {
 .search-bar {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0; /* Remove gap between input and button */
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -44,11 +44,12 @@ header {
     width: 300px;
 }
 
+
 .search-bar input {
-    flex: 1;
+    flex-grow: 1; /* Ensure input takes up available space */
     padding: 8px 10px;
-    border: none;
-    outline: none;
+    border: #228B22;
+    outline:auto;
     font-size: 16px;
     color: #333;
     border-radius: 4px 0 0 4px;
@@ -56,6 +57,7 @@ header {
 
 .search-bar input::placeholder {
     color: #aaa;
+    font-style: italic;
 }
 
 .search-bar button {
@@ -71,20 +73,22 @@ header {
 
 .search-bar button:hover {
     background-color: #1e7a1e;
+    transform: scale(1.05); /* Slight zoom effect */
 }
 
 /* Responsive Design for Search Bar */
-@media (max-width: 950px) {
-    .search-container {
-        padding: 10px;
+@media (max-width: 600px) {
+    .search-bar {
+        flex-direction: column;
+        gap: 10px;
     }
 
-    .search-bar {
-        width: 100%; /* Full width on smaller screens */
-        max-width: 400px; /* Add a max-width to keep it balanced */
+    .search-bar input,
+    .search-bar button {
+        width: 100%;
+        border-radius: 4px;
     }
 }
-
 .navbar {
     display: flex;
     padding: 22px 0;
@@ -240,7 +244,7 @@ header {
 
 .signup .form-details {
     padding: 0 20px;
-    background: url("Images/Signup.jpg");
+    background: url("Images/Login.jpg");
     background-position: center;
     background-size: cover;
 }
