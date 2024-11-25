@@ -4,9 +4,9 @@ body {
     background: url("Images/Background\ 1.jpg") center/cover no-repeat;
 }
 header {
-    background-color: #4CAF50;
+    
     color: white;
-    padding: 20px;
+    padding: 5px;
     text-align: center;
 }
 main {
@@ -14,10 +14,10 @@ main {
 }
 
 h2 {
-    color: #333;
+    color: #fff;
 }
 p {
-    color: #666;
+    color: #fff;
 }
 .team-member {
     margin-bottom: 20px;
@@ -31,9 +31,9 @@ p {
     margin-right: 15px;
 }
 .team-member h3 {
-    color: #333;
+    color: #fff;
     margin-bottom: 0;
 }
 .team-member p {
-    color: #666;
+    color: #fff;
 }
