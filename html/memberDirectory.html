@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Directory</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/html/home.html" class="logo">
+                <img src="/assets/logo.jpeg" alt="AgriChamber Logo" width="40" height="40">
+                <h1>AgriChamber</h1>
+            </a>
+            <nav>
+                <button id="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul id="main-nav">
+                    <li><a href="/html/home.html">Home</a></li>
+                    <li><a href="/html/aboutUs.html">About Us</a></li>
+                    <li><a href="/html/newsAndEvents.html">News and Events</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="/html/memberDirectory.html">Member Directory</a></li>
+                    <li><a href="/html/contactUs.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <button class="btn btn-outline">Member Login</button>
+        </div>
+    </header>
+    <section id="member-directory">
+        <h1>Member Directory</h1>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search for members..." onkeyup="searchMembers()">
+        </div>
+
+        <!-- Member List -->
+        <div class="members-list" id="members-list">
+            <div class="member">
+                <h3>John Doe</h3>
+                <p><strong>Company:</strong> ABC Corp</p>
+                <p><strong>Email:</strong> johndoe@abccorp.com</p>
+                <p><strong>Phone:</strong> +1 234 567 890</p>
+            </div>
+            <div class="member">
+                <h3>Jane Smith</h3>
+                <p><strong>Company:</strong> XYZ Ltd</p>
+                <p><strong>Email:</strong> janesmith@xyzltd.com</p>
+                <p><strong>Phone:</strong> +1 345 678 901</p>
+            </div>
+            <div class="member">
+                <h3>Michael Johnson</h3>
+                <p><strong>Company:</strong> M&J Enterprises</p>
+                <p><strong>Email:</strong> michael@mjenterprises.com</p>
+                <p><strong>Phone:</strong> +1 456 789 012</p>
+            </div>
+            <div class="member">
+                <h3>Alice Williams</h3>
+                <p><strong>Company:</strong> GreenTech Solutions</p>
+                <p><strong>Email:</strong> alice@greentech.com</p>
+                <p><strong>Phone:</strong> +1 567 890 123</p>
+            </div>
+            <!-- More members can be added here -->
+        </div>
+    </section>
+
+    <script src="/js/script.js"></script>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="aboutUs.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="newsAndEvents.html">News and Events</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Information</h4>
+                    <p>123 Agri Lane, Farmville, AG 12345</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Email: info@agrichamber.com</p>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">Facebook</a>
+                        <a href="#" aria-label="Twitter">Twitter</a>
+                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="#" aria-label="Instagram">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 AgriChamber. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
