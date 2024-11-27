@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hidePopup(registerPopup);
         }
     });
-
+    // Authentication state observer
     // Authentication state observer
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
