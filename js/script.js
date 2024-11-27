@@ -6,6 +6,75 @@ document.addEventListener('DOMContentLoaded', function() {
         mainNav.classList.toggle('show');
     });
 
+    // Popup functionality
+    const memberLoginBtn = document.getElementById('member-login');
+    const loginPopup = document.getElementById('login-popup');
+    const registerPopup = document.getElementById('register-popup');
+    const showRegisterLink = document.getElementById('show-register');
+    const showLoginLink = document.getElementById('show-login');
+    const closePopupButtons = document.querySelectorAll('.close-popup');
+
+    function showPopup(popup) {
+        popup.style.display = 'block';
+    }
+
+    function hidePopup(popup) {
+        popup.style.display = 'none';
+    }
+
+    memberLoginBtn.addEventListener('click', () => showPopup(loginPopup));
+    showRegisterLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        hidePopup(loginPopup);
+        showPopup(registerPopup);
+    });
+    showLoginLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        hidePopup(registerPopup);
+        showPopup(loginPopup);
+    });
+
+    closePopupButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            hidePopup(loginPopup);
+            hidePopup(registerPopup);
+        });
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === loginPopup || e.target === registerPopup) {
+            hidePopup(loginPopup);
+            hidePopup(registerPopup);
+        }
+    });
+
+    // Authentication state observer
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // User is signed in
+            console.log("User is signed in:", user);
+            memberLoginBtn.textContent = 'Logout';
+            memberLoginBtn.removeEventListener('click', () => showPopup(loginPopup));
+            memberLoginBtn.addEventListener('click', () => {
+                firebase.auth().signOut().then(() => {
+                    console.log("User signed out successfully");
+                    location.reload();
+                }).catch((error) => {
+                    console.error("Sign out error:", error);
+                });
+            });
+        } else {
+            // User is signed out
+            console.log("User is signed out");
+            memberLoginBtn.textContent = 'Member Login';
+            memberLoginBtn.removeEventListener('click', () => {
+                firebase.auth().signOut();
+            });
+            memberLoginBtn.addEventListener('click', () => showPopup(loginPopup));
+        }
+    });
+
     // Close the menu when a link is clicked
     mainNav.addEventListener('click', function(e) {
         if (e.target.tagName === 'A') {

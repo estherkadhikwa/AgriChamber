@@ -318,6 +318,11 @@ footer a:hover {
 }
 
 /* About Us Page Styles */
+h3 {
+    text-align: center;
+    margin: 50px;
+}
+
 .team-grid {
     display: flex;
     flex-wrap: wrap;
@@ -441,6 +446,7 @@ h2 {
     }
 }
 
+<<<<<<< Updated upstream
 /*news and events */
 #news-events {
     background-color: var(--color-primary-light);
@@ -783,4 +789,94 @@ a:hover {
     .contact-form button {
         width: 100%;
     }
+=======
+/* Popup Styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Authentication Form Styles */
+.popup-content h2 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.popup-content .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup-content .btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.auth-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+>>>>>>> Stashed changes
 }

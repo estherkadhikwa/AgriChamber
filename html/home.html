@@ -29,7 +29,7 @@
                     <li><a href="/html/contactUs.html">Contact Us</a></li>
                 </ul>
             </nav>
-            <button class="btn btn-outline">Member Login</button>
+            <button id="member-login" class="btn btn-outline">Member Login</button>
         </div>
     </header>
 
@@ -156,6 +156,51 @@
             </div>
         </div>
     </footer>
+
+    <!-- Login Popup -->
+    <div id="login-popup" class="popup">
+        <div class="popup-content">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="auth-link">Don't have an account? <a href="#" id="show-register">Register here</a></p>
+            <button class="close-popup">&times;</button>
+        </div>
+    </div>
+
+    <!-- Register Popup -->
+    <div id="register-popup" class="popup">
+        <div class="popup-content">
+            <h2>Register</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <p class="auth-link">Already have an account? <a href="#" id="show-login">Login here</a></p>
+            <button class="close-popup">&times;</button>
+        </div>
+    </div>
+
 </body>
 </html>
 
