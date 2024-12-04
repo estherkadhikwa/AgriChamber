@@ -1,4 +1,3 @@
-// firebase-config.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
@@ -12,7 +11,6 @@ const firebaseConfig = {
     appId: "1:400333526643:web:e9dd766ad2ee294346fc06",
     measurementId: "G-2HC71SF4PH"
 };
-
 
 // Check if analytics is supported before initializing
 isSupported().then((supported) => {
@@ -42,10 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const showLoginLink = document.getElementById('show-login');
     const closePopupButtons = document.querySelectorAll('.close-popup');
     const searchForm = document.querySelector('.search-container');
-    const searchInput = searchForm.querySelector('input');
+    const searchInput = searchForm?.querySelector('input');
+    const logoutButton = document.getElementById('logout-button');
 
     // Toggle mobile menu
-    menuToggle.addEventListener('click', () => {
+    menuToggle?.addEventListener('click', () => {
         mainNav.classList.toggle('show');
     });
 
@@ -58,13 +57,13 @@ document.addEventListener('DOMContentLoaded', function () {
         popup.style.display = 'none';
     };
 
-    memberLoginBtn.addEventListener('click', () => showPopup(loginPopup));
-    showRegisterLink.addEventListener('click', (e) => {
+    memberLoginBtn?.addEventListener('click', () => showPopup(loginPopup));
+    showRegisterLink?.addEventListener('click', (e) => {
         e.preventDefault();
         hidePopup(loginPopup);
         showPopup(registerPopup);
     });
-    showLoginLink.addEventListener('click', (e) => {
+    showLoginLink?.addEventListener('click', (e) => {
         e.preventDefault();
         hidePopup(registerPopup);
         showPopup(loginPopup);
@@ -89,33 +88,83 @@ document.addEventListener('DOMContentLoaded', function () {
     const updateAuthState = (user) => {
         if (user) {
             console.log("User is signed in:", user);
-            memberLoginBtn.textContent = 'Logout';
-            memberLoginBtn.onclick = () => {
-                signOut(auth).then(() => {
-                    console.log("User signed out successfully");
-                    location.reload();
-                }).catch((error) => {
-                    console.error("Sign out error:", error);
-                });
-            };
+            if (memberLoginBtn) {
+                memberLoginBtn.style.display = 'inline-block';
+            }
+            if (logoutButton) {
+                logoutButton.style.display = 'inline-block';
+            }
+
+            // If on member dashboard page, update content
+            if (window.location.pathname.includes('member-dashboard.html')) {
+                updateMemberDashboard(user);
+            } else {
+                // Redirect to member dashboard if on login page
+                if (window.location.pathname.includes('login.html')) {
+                    window.location.href = 'member-dashboard.html';
+                }
+            }
         } else {
             console.log("User is signed out");
-            memberLoginBtn.textContent = 'Member Login';
-            memberLoginBtn.onclick = () => showPopup(loginPopup);
+            if (memberLoginBtn) {
+                memberLoginBtn.style.display = 'inline-block';
+            }
+            if (logoutButton) {
+                logoutButton.style.display = 'none';
+            }
+
+            // Redirect to login page if trying to access member dashboard
+            if (window.location.pathname.includes('member-dashboard.html')) {
+                window.location.href = 'login.html';
+            }
         }
     };
 
     onAuthStateChanged(auth, updateAuthState);
 
+    // Logout functionality
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function() {
+            signOut(auth).then(() => {
+                console.log("User signed out successfully");
+                alert("Logged out successfully!");
+                window.location.href = 'home.html';
+            }).catch((error) => {
+                console.error("Sign out error:", error);
+            });
+        });
+    }
+
+    // Function to update member dashboard content
+    window.updateMemberDashboard = function(user) {
+        const memberName = document.getElementById('member-name');
+        if (memberName) {
+            memberName.textContent = user.email.split('@')[0]; // Display username part of email
+        }
+
+        // Populate recent activity (example data)
+        const activityList = document.getElementById('activity-list');
+        if (activityList) {
+            const recentActivities = [
+                'Viewed latest market report',
+                'Commented on Sustainable Farming forum',
+                'Registered for upcoming webinar',
+                'Downloaded industry trend analysis'
+            ];
+
+            activityList.innerHTML = recentActivities.map(activity => `<li>${activity}</li>`).join('');
+        }
+    }
+
     // Close menu when a link is clicked
-    mainNav.addEventListener('click', (e) => {
+    mainNav?.addEventListener('click', (e) => {
         if (e.target.tagName === 'A') {
             mainNav.classList.remove('show');
         }
     });
 
     // Search form validation
-    searchForm.addEventListener('submit', (e) => {
+    searchForm?.addEventListener('submit', (e) => {
         e.preventDefault();
         if (searchInput.value.trim() === '') {
             alert('Please enter a search term');
@@ -145,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Login form submission
-    document.getElementById("login-form").addEventListener("submit", (e) => {
+    document.getElementById("login-form")?.addEventListener("submit", (e) => {
         e.preventDefault();
         const email = document.getElementById("login-email").value;
         const password = document.getElementById("login-password").value;
@@ -154,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then((userCredential) => {
                 alert("Login successful!");
                 console.log(userCredential.user);
+                window.location.href = 'member-dashboard.html';
             })
             .catch((error) => {
                 alert("Login failed: " + error.message);
@@ -161,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Register form submission
-    document.getElementById("register-form").addEventListener("submit", (e) => {
+    document.getElementById("register-form")?.addEventListener("submit", (e) => {
         e.preventDefault();
         const email = document.getElementById("register-email").value;
         const password = document.getElementById("register-password").value;
@@ -176,10 +226,10 @@ document.addEventListener('DOMContentLoaded', function () {
             .then((userCredential) => {
                 alert("Registration successful!");
                 console.log(userCredential.user);
+                window.location.href = 'member-dashboard.html';
             })
             .catch((error) => {
                 alert("Registration failed: " + error.message);
             });
     });
-    
 });
