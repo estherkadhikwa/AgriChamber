@@ -1,26 +1,62 @@
-document.addEventListener('DOMContentLoaded', function() {
+// firebase-config.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBhTjz4Rq9K-DIckaKC-KuHtMrX7ENPC3A",
+    authDomain: "agrichamber-b4c68.firebaseapp.com",
+    projectId: "agrichamber-b4c68",
+    storageBucket: "agrichamber-b4c68.firebasestorage.app",
+    messagingSenderId: "400333526643",
+    appId: "1:400333526643:web:e9dd766ad2ee294346fc06",
+    measurementId: "G-2HC71SF4PH"
+};
+
+
+// Check if analytics is supported before initializing
+isSupported().then((supported) => {
+    if (supported) {
+      const analytics = getAnalytics(app);
+      // Your analytics setup code here
+    } else {
+      console.log("Analytics is not supported in this environment.");
+    }
+  });
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+
+export { app, analytics, auth };
+
+document.addEventListener('DOMContentLoaded', function () {
+    // DOM Elements
     const menuToggle = document.getElementById('menu-toggle');
     const mainNav = document.getElementById('main-nav');
-
-    menuToggle.addEventListener('click', function() {
-        mainNav.classList.toggle('show');
-    });
-
-    // Popup functionality
     const memberLoginBtn = document.getElementById('member-login');
     const loginPopup = document.getElementById('login-popup');
     const registerPopup = document.getElementById('register-popup');
     const showRegisterLink = document.getElementById('show-register');
     const showLoginLink = document.getElementById('show-login');
     const closePopupButtons = document.querySelectorAll('.close-popup');
+    const searchForm = document.querySelector('.search-container');
+    const searchInput = searchForm.querySelector('input');
 
-    function showPopup(popup) {
+    // Toggle mobile menu
+    menuToggle.addEventListener('click', () => {
+        mainNav.classList.toggle('show');
+    });
+
+    // Popup functionality
+    const showPopup = (popup) => {
         popup.style.display = 'block';
-    }
+    };
 
-    function hidePopup(popup) {
+    const hidePopup = (popup) => {
         popup.style.display = 'none';
-    }
+    };
 
     memberLoginBtn.addEventListener('click', () => showPopup(loginPopup));
     showRegisterLink.addEventListener('click', (e) => {
@@ -34,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showPopup(loginPopup);
     });
 
-    closePopupButtons.forEach(button => {
+    closePopupButtons.forEach((button) => {
         button.addEventListener('click', () => {
             hidePopup(loginPopup);
             hidePopup(registerPopup);
@@ -48,83 +84,102 @@ document.addEventListener('DOMContentLoaded', function() {
             hidePopup(registerPopup);
         }
     });
+
     // Authentication state observer
-    // Authentication state observer
-    firebase.auth().onAuthStateChanged((user) => {
+    const updateAuthState = (user) => {
         if (user) {
-            // User is signed in
             console.log("User is signed in:", user);
             memberLoginBtn.textContent = 'Logout';
-            memberLoginBtn.removeEventListener('click', () => showPopup(loginPopup));
-            memberLoginBtn.addEventListener('click', () => {
-                firebase.auth().signOut().then(() => {
+            memberLoginBtn.onclick = () => {
+                signOut(auth).then(() => {
                     console.log("User signed out successfully");
                     location.reload();
                 }).catch((error) => {
                     console.error("Sign out error:", error);
                 });
-            });
+            };
         } else {
-            // User is signed out
             console.log("User is signed out");
             memberLoginBtn.textContent = 'Member Login';
-            memberLoginBtn.removeEventListener('click', () => {
-                firebase.auth().signOut();
-            });
-            memberLoginBtn.addEventListener('click', () => showPopup(loginPopup));
+            memberLoginBtn.onclick = () => showPopup(loginPopup);
         }
-    });
+    };
 
-    // Close the menu when a link is clicked
-    mainNav.addEventListener('click', function(e) {
+    onAuthStateChanged(auth, updateAuthState);
+
+    // Close menu when a link is clicked
+    mainNav.addEventListener('click', (e) => {
         if (e.target.tagName === 'A') {
             mainNav.classList.remove('show');
         }
     });
 
-    // Simple form validation for the search input
-    const searchForm = document.querySelector('.search-container');
-    const searchInput = searchForm.querySelector('input');
-
-    searchForm.addEventListener('submit', function(e) {
+    // Search form validation
+    searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
         if (searchInput.value.trim() === '') {
             alert('Please enter a search term');
         } else {
-            // Perform search or redirect to search results page
             console.log('Searching for:', searchInput.value);
         }
     });
-});
 
-/* Member Directory */
-function searchMembers() {
-    let input = document.getElementById('search-input');
-    let filter = input.value.toLowerCase();
-    let members = document.getElementsByClassName('member');
+    // Member directory search
+    window.searchMembers = () => {
+        const input = document.getElementById('search-input');
+        const filter = input.value.toLowerCase();
+        const members = document.getElementsByClassName('member');
 
-    // Loop through all members and hide those who don't match the search query
-    for (let i = 0; i < members.length; i++) {
-        let name = members[i].getElementsByTagName('h3')[0];
-        let company = members[i].getElementsByTagName('p')[0]; // Looking at the first <p> for company name
-        let email = members[i].getElementsByTagName('p')[1]; // Looking at the second <p> for email
-        let phone = members[i].getElementsByTagName('p')[2]; // Looking at the third <p> for phone number
+        Array.from(members).forEach((member) => {
+            const name = member.querySelector('h3')?.innerText.toLowerCase() || '';
+            const company = member.querySelectorAll('p')[0]?.innerText.toLowerCase() || '';
+            const email = member.querySelectorAll('p')[1]?.innerText.toLowerCase() || '';
+            const phone = member.querySelectorAll('p')[2]?.innerText.toLowerCase() || '';
 
-        if (name || company || email || phone) {
-            let nameText = name.textContent || name.innerText;
-            let companyText = company.textContent || company.innerText;
-            let emailText = email.textContent || email.innerText;
-            let phoneText = phone.textContent || phone.innerText;
-
-            if (nameText.toLowerCase().includes(filter) || 
-                companyText.toLowerCase().includes(filter) || 
-                emailText.toLowerCase().includes(filter) || 
-                phoneText.toLowerCase().includes(filter)) {
-                members[i].style.display = "";
+            if ([name, company, email, phone].some((text) => text.includes(filter))) {
+                member.style.display = '';
             } else {
-                members[i].style.display = "none";
+                member.style.display = 'none';
             }
-        }
-    }
-}
+        });
+    };
 
+    // Login form submission
+    document.getElementById("login-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                alert("Login successful!");
+                console.log(userCredential.user);
+            })
+            .catch((error) => {
+                alert("Login failed: " + error.message);
+            });
+    });
+
+    // Register form submission
+    document.getElementById("register-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("register-email").value;
+        const password = document.getElementById("register-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                alert("Registration successful!");
+                console.log(userCredential.user);
+            })
+            .catch((error) => {
+                alert("Registration failed: " + error.message);
+            });
+    });
+    
+});
