@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
             signOut(auth).then(() => {
                 console.log("User signed out successfully");
                 alert("Logged out successfully!");
-                window.location.href = 'home.html';
+                window.location.href = 'index.html';
             }).catch((error) => {
                 console.error("Sign out error:", error);
             });
